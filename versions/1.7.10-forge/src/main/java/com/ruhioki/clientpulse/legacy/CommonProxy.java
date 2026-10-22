@@ -6,4 +6,8 @@ public class CommonProxy {
 
     public void saveSettings() {
     }
+
+    public boolean isOpenSettingsKey(int keyCode) {
+        return false;
+    }
 }

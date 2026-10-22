@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
@@ -161,7 +162,7 @@ public final class ClientPulseScreen extends Screen {
             graphics.text(this.font, feature.description(), listLeft + 4, descriptionY, MUTED_COLOR, false);
             descriptionY += 48;
         }
-        String status = saveFailed ? "Could not save settings. Check the log." : "F8  •  Close with Escape";
+        String status = saveFailed ? "Could not save settings. Check the log." : "Right Shift or Escape to close";
         graphics.text(this.font, status, panelLeft, this.height - 22,
                 saveFailed ? 0xFFFF8A80 : MUTED_COLOR, false);
     }
@@ -169,5 +170,14 @@ public final class ClientPulseScreen extends Screen {
     @Override
     public void onClose() {
         this.minecraft.gui.setScreen(parent);
+    }
+
+    @Override
+    public boolean keyPressed(KeyEvent keyEvent) {
+        if (!searchBox.isFocused() && ClientPulseClient.openSettingsKeyMatches(keyEvent)) {
+            onClose();
+            return true;
+        }
+        return super.keyPressed(keyEvent);
     }
 }

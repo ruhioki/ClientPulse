@@ -21,7 +21,7 @@ import org.lwjgl.input.Keyboard;
 
 public final class ClientProxy189 extends CommonProxy189 {
     private static final KeyBinding OPEN_SETTINGS = new KeyBinding(
-            "key.clientpulse.open_settings", Keyboard.KEY_F8, "key.categories.clientpulse");
+            "key.clientpulse.open_settings", Keyboard.KEY_RSHIFT, "key.categories.clientpulse");
 
     private File settingsFile;
     private long frameWindowStart;
@@ -38,8 +38,12 @@ public final class ClientProxy189 extends CommonProxy189 {
 
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.END && OPEN_SETTINGS.isPressed()) {
-            Minecraft.getMinecraft().displayGuiScreen(new ClientPulseSettingsScreen189());
+        if (event.phase == TickEvent.Phase.END) {
+            boolean pressed = OPEN_SETTINGS.isPressed();
+            Minecraft minecraft = Minecraft.getMinecraft();
+            if (pressed && minecraft.currentScreen == null) {
+                minecraft.displayGuiScreen(new ClientPulseSettingsScreen189());
+            }
         }
     }
 
@@ -90,6 +94,11 @@ public final class ClientProxy189 extends CommonProxy189 {
         } catch (IOException exception) {
             System.err.println("[ClientPulse] Could not save settings: " + exception.getMessage());
         }
+    }
+
+    @Override
+    public boolean isOpenSettingsKey(int keyCode) {
+        return OPEN_SETTINGS.getKeyCode() == keyCode;
     }
 
     private void loadSettings() {

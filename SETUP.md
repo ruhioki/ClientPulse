@@ -14,7 +14,7 @@ Gradle is supplied by the wrapper. No system Gradle installation is required.
 2. Set the Gradle JVM to JDK 25 and allow the initial sync to finish.
 3. Run `.\gradlew.bat build` to compile, test, and package the mod.
 4. Run `.\gradlew.bat runClient` to start Minecraft with ClientPulse in a development instance.
-5. Press F8 in the game to open the ClientPulse feature screen.
+5. Press Right Shift in the game to open the ClientPulse Click GUI.
 
 The first Gradle run downloads the configured Gradle distribution and game dependencies. The mod uses Minecraft's normal authentication and launch process; a development launch requires the game assets and network access to be available.
 
