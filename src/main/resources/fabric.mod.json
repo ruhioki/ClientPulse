@@ -4,6 +4,12 @@
   "version": "${version}",
   "name": "ClientPulse",
   "description": "A client-side Minecraft mod exploring performance, customization, and clean code.",
+  "authors": ["ruhioki"],
+  "contact": {
+    "homepage": "https://github.com/ruhioki/ClientPulse",
+    "sources": "https://github.com/ruhioki/ClientPulse"
+  },
+  "license": "MIT",
   "environment": "client",
   "entrypoints": {
     "client": ["com.ruhioki.clientpulse.ClientPulseClient"]
