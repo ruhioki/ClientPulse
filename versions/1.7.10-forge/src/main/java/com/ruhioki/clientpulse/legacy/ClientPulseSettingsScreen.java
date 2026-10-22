@@ -36,6 +36,15 @@ public final class ClientPulseSettingsScreen extends GuiScreen {
     }
 
     @Override
+    protected void keyTyped(char typedChar, int keyCode) {
+        if (ClientPulseLegacy.proxy.isOpenSettingsKey(keyCode)) {
+            this.mc.displayGuiScreen(null);
+            return;
+        }
+        super.keyTyped(typedChar, keyCode);
+    }
+
+    @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, "ClientPulse | Minecraft 1.7.10",

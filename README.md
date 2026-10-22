@@ -7,12 +7,12 @@ ClientPulse is a multi-version client project for Minecraft Java Edition. It kee
 | Feature | Status |
 |---|---|
 | Shared Java 8-compatible feature model and registry | Implemented |
-| Minecraft 26.3 Fabric client, searchable settings screen, F8 keybind, HUD modules | Build and unit tests pass; in-game launch not yet verified |
+| Minecraft 26.3 Fabric client, searchable settings screen, Right Shift keybind, HUD modules | Build and unit tests pass; in-game launch not yet verified |
 | Minecraft 1.8.9 Forge client, HUD modules and settings | Build verified on JDK 8; OptiFine runtime not yet verified |
 | Minecraft 1.7.10 Forge client and matching HUD/settings controls | Build verified on JDK 8; in-game launch not yet verified |
 | Windows development-client launch and in-game feature verification | Not yet verified |
 
-All HUD modules are off by default. The modern settings screen opens with F8 or from Options > Controls > Key Binds; the 1.7.10 build uses its Forge Controls keybind.
+All HUD modules are off by default. The Click GUI opens with Right Shift by default on all implemented targets. Rebind it in Options > Controls > Key Binds. The keybind does not open the GUI while another screen, including chat, is active.
 
 See [docs/compatibility.md](docs/compatibility.md) for the support matrix and exact verification status.
 

@@ -22,7 +22,7 @@ import com.ruhioki.clientpulse.core.feature.FeatureRegistry;
 
 public final class ClientProxy extends CommonProxy {
     private static final KeyBinding OPEN_SETTINGS = new KeyBinding(
-            "key.clientpulse.open_settings", Keyboard.KEY_F8, "key.categories.clientpulse");
+            "key.clientpulse.open_settings", Keyboard.KEY_RSHIFT, "key.categories.clientpulse");
 
     private File settingsFile;
     private long frameWindowStart;
@@ -39,8 +39,12 @@ public final class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.END && OPEN_SETTINGS.isPressed()) {
-            Minecraft.getMinecraft().displayGuiScreen(new ClientPulseSettingsScreen());
+        if (event.phase == TickEvent.Phase.END) {
+            boolean pressed = OPEN_SETTINGS.isPressed();
+            Minecraft minecraft = Minecraft.getMinecraft();
+            if (pressed && minecraft.currentScreen == null) {
+                minecraft.displayGuiScreen(new ClientPulseSettingsScreen());
+            }
         }
     }
 
@@ -91,6 +95,11 @@ public final class ClientProxy extends CommonProxy {
         } catch (IOException exception) {
             System.err.println("[ClientPulse] Could not save settings: " + exception.getMessage());
         }
+    }
+
+    @Override
+    public boolean isOpenSettingsKey(int keyCode) {
+        return OPEN_SETTINGS.getKeyCode() == keyCode;
     }
 
     private void loadSettings() {
