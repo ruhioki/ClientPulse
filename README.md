@@ -1,7 +1,7 @@
 # ClientPulse
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0D1117,50:76B900,100:A78BFA&text=ClientPulse&fontColor=FFFFFF&fontSize=64&fontAlignY=38&desc=Java%20%7C%20Minecraft%20%7C%20Client%20Development&descAlignY=60&descSize=16" width="100%" alt="ClientPulse banner"/>
+  <img src="assets/clientpulse-preview.png" width="100%" alt="ClientPulse Minecraft client dashboard concept"/>
 </p>
 
 <p align="center">
