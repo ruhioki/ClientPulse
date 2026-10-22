@@ -2,6 +2,10 @@
 .gradle/
 build/
 out/
+run/
+logs/
+hs_err_pid*
+versions/1.7.10-forge/run/
 
 # IntelliJ IDEA
 .idea/

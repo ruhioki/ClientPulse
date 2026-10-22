@@ -1,0 +1,10 @@
+[
+  {
+    "modid": "clientpulse",
+    "name": "ClientPulse",
+    "description": "A client-side HUD and settings experience.",
+    "version": "0.1.0",
+    "mcversion": "1.7.10",
+    "clientSideOnly": true
+  }
+]

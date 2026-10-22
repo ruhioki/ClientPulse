@@ -13,10 +13,26 @@ repositories {
     mavenCentral()
 }
 
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        clientpulse {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    implementation project(':clientpulse-core')
+    include project(':clientpulse-core')
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
 }
 
 processResources {
@@ -33,9 +49,19 @@ tasks.withType(JavaCompile).configureEach {
     options.release = javaVersion
 }
 
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(javaVersion)
     }
     withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.name}" }
+    }
 }
