@@ -8,6 +8,7 @@ ClientPulse is a multi-version client project for Minecraft Java Edition. It kee
 |---|---|
 | Shared Java 8-compatible feature model and registry | Implemented |
 | Minecraft 26.3 Fabric client, searchable settings screen, F8 keybind, HUD modules | Build and unit tests pass; in-game launch not yet verified |
+| Minecraft 1.8.9 Forge client, HUD modules and settings | Build verified on JDK 8; OptiFine runtime not yet verified |
 | Minecraft 1.7.10 Forge client and matching HUD/settings controls | Build verified on JDK 8; in-game launch not yet verified |
 | Windows development-client launch and in-game feature verification | Not yet verified |
 
@@ -48,9 +49,20 @@ Set-Location .\versions\1.7.10-forge
 
 The legacy wrapper and Forge dependencies build successfully; runtime launch and in-game behavior remain unverified.
 
+## Minecraft 1.8.9 Forge test build
+
+The 1.8.9 build is a separate Forge mod and is not compatible with the 1.7.10 or 26.3 artifacts. It targets Forge 11.15.1.2318 and Java 8; its local build succeeds. To build it locally:
+
+```powershell
+Set-Location .\versions\1.8.9-forge
+.\gradlew.bat build
+```
+
+To try it with OptiFine, use a Minecraft 1.8.9 Forge profile with Forge 11.15.1.2318 and a matching OptiFine 1.8.9 installation. Put the `clientpulse-1.8.9-0.1.0.jar` artifact in that profile's `mods` folder. OptiFine compatibility has not been verified in-game; report crashes with the full game log and the exact Forge/OptiFine versions.
+
 ## Configuration
 
-The file `config/clientpulse.json` is created in the Minecraft game directory. It stores the enabled state of registered features. Unknown feature IDs are ignored so configurations remain forward-compatible. If the file is invalid, ClientPulse logs a warning and starts with default feature states.
+The modern Fabric target stores settings in `config/clientpulse.json`. Forge targets store separate properties files under `config/`. All HUD modules are off by default.
 
 ## Project layout
 
@@ -65,11 +77,12 @@ src/
 ├── client/resources/       # Client translations
 └── main/resources/         # Fabric mod metadata
 versions/
-└── 1.7.10-forge/              # Standalone ForgeGradle 1.2 build and legacy adapter
+├── 1.7.10-forge/              # ForgeGradle 1.2 build and legacy adapter
+└── 1.8.9-forge/               # ForgeGradle 2.1 build and 1.8.9 adapter
 ```
 
 ## Development
 
-Run `.\gradlew.bat test` for unit tests and `.\gradlew.bat build` for the modern target. Use the version-specific wrapper for legacy builds. The GitHub Actions workflow builds both configured targets independently. The modern JAR is written to `build/libs/`; the legacy JAR is written to `versions/1.7.10-forge/build/libs/`. No screenshots or performance gains are claimed; graphical launch and in-game behavior still need verification on a machine with Minecraft assets and a usable display.
+Run `.\gradlew.bat test` for unit tests and `.\gradlew.bat build` for the modern target. Use the version-specific wrappers for Forge targets. The GitHub Actions workflow builds each configured target independently. The modern and Forge JARs are written to their respective `build/libs/` directories. Graphical launch and in-game behavior still need verification on a machine with Minecraft assets and a usable display.
 
 ClientPulse is licensed under the MIT License. Minecraft and Fabric are third-party projects; their respective terms apply.
