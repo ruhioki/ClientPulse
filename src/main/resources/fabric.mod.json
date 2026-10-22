@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "clientpulse",
+  "version": "${version}",
+  "name": "ClientPulse",
+  "description": "A client-side Fabric project for learning Java and building performance-focused features.",
+  "authors": ["ruhioki"],
+  "contact": {
+    "homepage": "https://github.com/ruhioki/ClientPulse",
+    "sources": "https://github.com/ruhioki/ClientPulse"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.ruhioki.clientpulse.ClientPulseClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "fabric-api": "*"
+  }
+}
