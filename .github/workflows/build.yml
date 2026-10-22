@@ -71,6 +71,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: clientpulse-1.8.9-forge-${{ github.sha }}
-          path: build/libs/*.jar
+          path: versions/1.8.9-forge/build/libs/*.jar
           if-no-files-found: error
           retention-days: 14
