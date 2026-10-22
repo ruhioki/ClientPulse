@@ -1,0 +1,137 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#080610"/>
+      <stop offset="55%" stop-color="#11102A"/>
+      <stop offset="100%" stop-color="#0B0718"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="55%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity=".25"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#A78BFA" stroke-opacity=".09"/>
+    </pattern>
+    <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="clip">
+      <rect width="1200" height="360" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#clip)">
+    <rect width="1200" height="360" fill="url(#bg)"/>
+    <rect width="1200" height="360" fill="url(#grid)"/>
+    <ellipse cx="610" cy="130" rx="440" ry="250" fill="url(#glow)"/>
+
+    <!-- Animated purple particles -->
+    <g fill="#A855F7">
+      <circle cx="100" cy="80" r="2">
+        <animate attributeName="cy" values="80;45;80" dur="5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".2;1;.2" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="1060" cy="90" r="3">
+        <animate attributeName="cy" values="90;125;90" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;.2;1" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="960" cy="285" r="2">
+        <animate attributeName="cy" values="285;250;285" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="240" cy="270" r="3">
+        <animate attributeName="opacity" values=".2;1;.2" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="1100" cy="235" r="2">
+        <animate attributeName="cy" values="235;205;235" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="360" cy="65" r="2">
+        <animate attributeName="opacity" values="1;.15;1" dur="3s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- Decorative circuit lines -->
+    <g fill="none" stroke="url(#pulse)" stroke-width="1.5" opacity=".8">
+      <path d="M0 100H110L145 65H250"/>
+      <path d="M1200 105H1090L1055 140H990"/>
+      <path d="M0 300H135L165 270H230"/>
+      <path d="M1200 290H1080L1045 325H950"/>
+    </g>
+    <g fill="#A855F7">
+      <rect x="105" y="95" width="6" height="6"/>
+      <rect x="245" y="62" width="6" height="6"/>
+      <rect x="1086" y="102" width="6" height="6"/>
+      <rect x="1076" y="286" width="6" height="6"/>
+    </g>
+
+    <!-- Client modules panel -->
+    <rect x="34" y="125" width="235" height="116" rx="12" fill="#0C1020" stroke="#8B5CF6" stroke-opacity=".65"/>
+    <text x="52" y="151" fill="#C4B5FD" font-family="monospace" font-size="11" letter-spacing="2">CLIENT MODULES</text>
+    <g font-family="Arial, sans-serif" font-size="13" fill="#E5E1F5">
+      <circle cx="56" cy="177" r="4" fill="#C084FC"/>
+      <text x="69" y="181">Performance HUD</text>
+      <circle cx="56" cy="202" r="4" fill="#A855F7"/>
+      <text x="69" y="206">Customizable UI</text>
+      <circle cx="56" cy="227" r="4" fill="#7C3AED"/>
+      <text x="69" y="231">Feature Modules</text>
+    </g>
+
+    <!-- Animated pulse logo -->
+    <g transform="translate(326 145)" filter="url(#softGlow)">
+      <path d="M0 25H19L30 8L43 48L58 0L73 34L85 19H102"
+            fill="none" stroke="url(#pulse)" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round"
+            stroke-dasharray="300 0">
+        <animate attributeName="stroke-dasharray" values="0 300;300 0;0 300" dur="7s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Main title: Client white, Pulse purple -->
+    <text x="710" y="164" text-anchor="middle"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="64" font-weight="800" fill="#FFFFFF"
+          letter-spacing="-2">Client<tspan fill="url(#pulse)">Pulse</tspan></text>
+
+    <!-- Animated underline -->
+    <rect x="430" y="183" width="560" height="2" rx="1" fill="#302442"/>
+    <rect x="430" y="183" width="180" height="2" rx="1" fill="url(#pulse)">
+      <animate attributeName="x" values="430;810;430" dur="6s" repeatCount="indefinite"/>
+    </rect>
+
+    <text x="710" y="216" text-anchor="middle"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="14" fill="#D8D0EA" letter-spacing="4">JAVA  •  MINECRAFT  •  FABRIC</text>
+
+    <text x="710" y="252" text-anchor="middle"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="18" fill="#FFFFFF">Learn the fundamentals. Build the features.</text>
+    <text x="710" y="278" text-anchor="middle"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="18" fill="#C4B5FD">Optimize the experience.</text>
+
+    <!-- Development status panel -->
+    <rect x="950" y="135" width="215" height="98" rx="12" fill="#0C1020" stroke="#8B5CF6" stroke-opacity=".65"/>
+    <text x="971" y="159" fill="#C4B5FD" font-family="monospace" font-size="10" letter-spacing="1.5">DEVELOPMENT STATUS</text>
+    <circle cx="977" cy="183" r="4" fill="#C084FC">
+      <animate attributeName="opacity" values="1;.25;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="989" y="187" fill="#E9D5FF" font-family="Arial, sans-serif" font-size="13">BUILDING</text>
+    <text x="971" y="211" fill="#E5E1F5" font-family="Arial, sans-serif" font-size="12">One feature at a time.</text>
+
+    <!-- Footer -->
+    <path d="M34 319H1166" stroke="#302442" stroke-width="1"/>
+    <text x="38" y="342" fill="#C4B5FD" font-family="monospace" font-size="11" letter-spacing="2">JAVA DEVELOPMENT PROJECT</text>
+    <text x="1162" y="342" text-anchor="end" fill="#D8B4FE" font-family="monospace" font-size="11">LEARN • BUILD • OPTIMIZE</text>
+
+    <rect x="2" y="2" width="1196" height="356" rx="17" fill="none" stroke="#8B5CF6" stroke-opacity=".6"/>
+  </g>
+</svg>
