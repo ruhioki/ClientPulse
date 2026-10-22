@@ -64,7 +64,7 @@ The Minecraft, Java, Fabric Loader, Fabric API, and Loom versions are listed in 
 ## Development Roadmap
 
 - [x] Add the starter source files and Fabric mod metadata.
-- [x] Add a GitHub Actions build check (unverified until it has run once).
+- [x] Add a GitHub Actions build check.
 - [ ] Import the project into IntelliJ IDEA and sync Gradle.
 - [ ] Run the Minecraft development client.
 - [ ] Verify the ClientPulse startup message in the log.

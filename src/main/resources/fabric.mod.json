@@ -3,7 +3,7 @@
   "id": "clientpulse",
   "version": "${version}",
   "name": "ClientPulse",
-  "description": "A client-side Fabric project for learning Java and building performance-focused features.",
+  "description": "A client-side Minecraft mod exploring performance, customization, and clean code.",
   "authors": ["ruhioki"],
   "contact": {
     "homepage": "https://github.com/ruhioki/ClientPulse",
@@ -16,6 +16,8 @@
   },
   "depends": {
     "fabricloader": ">=0.19.5",
+    "minecraft": "26.3",
+    "java": ">=25",
     "fabric-api": "*"
   }
 }
