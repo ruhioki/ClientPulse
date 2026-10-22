@@ -1,7 +1,7 @@
 # ClientPulse
 
 <p align="center">
-  <img src="assets/clientpulse-preview.png" width="100%" alt="ClientPulse Minecraft client dashboard concept"/>
+  <img src="assets/profile-banner.svg" width="100%" alt="ClientPulse animated purple and white banner"/>
 </p>
 
 <p align="center">
@@ -9,14 +9,14 @@
 </p>
 
 <p align="center">
-  A personal journey into Java programming and Minecraft client-side development, built one feature at a time.
+  A Java and Fabric Minecraft client-side development project, built one feature at a time.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java"/>
-  <img src="https://img.shields.io/badge/Minecraft-62A64B?style=for-the-badge&logo=minecraft&logoColor=white" alt="Minecraft"/>
-  <img src="https://img.shields.io/badge/Fabric-2196F3?style=for-the-badge" alt="Fabric"/>
-  <img src="https://img.shields.io/badge/Focus-Performance-76B900?style=for-the-badge" alt="Performance"/>
+  <img src="https://img.shields.io/badge/Java-FFFFFF?style=for-the-badge&logo=openjdk&logoColor=111111" alt="Java"/>
+  <img src="https://img.shields.io/badge/Minecraft-8B5CF6?style=for-the-badge&logo=minecraft&logoColor=white" alt="Minecraft"/>
+  <img src="https://img.shields.io/badge/Fabric-A855F7?style=for-the-badge" alt="Fabric"/>
+  <img src="https://img.shields.io/badge/Focus-Performance-C084FC?style=for-the-badge" alt="Performance"/>
   <img src="https://img.shields.io/badge/Status-In_Development-A78BFA?style=for-the-badge" alt="In development"/>
 </p>
 
@@ -24,49 +24,48 @@
 
 ## The Vision
 
-Minecraft client development is where programming, performance, user experience, and creativity come together.
+Minecraft client development brings together programming, performance, user experience, and creativity.
 
 **ClientPulse is my journey from writing Java code to building practical Minecraft client-side software.**
 
-I'm developing this project to deepen my understanding of Java, explore the Fabric modding ecosystem, and learn how to design clean, modular, and maintainable features.
+I'm using this project to deepen my understanding of Java, explore the Fabric modding ecosystem, and learn to design clean, modular, maintainable features.
 
-My long-term ambition is to create a polished client-side experience and build a strong software development portfolio for future Java developer opportunities, including opportunities at Lunar Client.
+My long-term ambition is to create a polished client-side experience and build a strong software development portfolio for future Java developer opportunities.
 
-This project represents a commitment to continuous learning, experimentation, and improvement. Every implementation should teach me something useful about building real software.
+## Current Starter
 
-## What I Want to Build
+This repository begins with a minimal Fabric client mod initializer. It confirms that ClientPulse can load in the Minecraft client and writes a startup message to the development log.
 
-ClientPulse aims to become a modular Minecraft client-side project focused on useful information, customization, and performance-conscious design.
+The dashboard banner is a **design concept**, not a claim that the pictured interface or its sample metrics are implemented.
 
-### Planned Features
+## Planned Features
 
 | Feature | Purpose |
 |---|---|
 | Performance HUD | Display useful FPS and client information |
-| Customizable HUD | Configure the position and appearance of supported elements |
-| Feature management | Organize client-side features into maintainable modules |
-| Keybind support | Provide convenient controls for supported features |
-| Settings interface | Give users a central place to configure options |
-| Modular architecture | Make the code easier to maintain and extend |
+| Customizable HUD | Configure supported on-screen elements |
+| Feature management | Organize features into maintainable modules |
+| Keybind support | Provide convenient controls |
+| Settings interface | Centralize user configuration |
 | Performance testing | Investigate the impact of implemented features |
 
-These features are planned goals. They will be marked as complete only after implementation and testing.
+These are plans. Mark a feature complete only after it has been implemented and tested.
 
 ## Technology Stack
 
 - **Java** for programming and object-oriented design.
 - **Fabric** for Minecraft mod development.
 - **Gradle** for builds and dependency management.
-- **IntelliJ IDEA** for development.
+- **IntelliJ IDEA** as the development environment.
 - **Git and GitHub** for version control and project documentation.
-- **Minecraft Java Edition** as the target platform.
 
-Exact version compatibility will be documented using the project's actual configuration files.
+The Minecraft, Java, Fabric Loader, Fabric API, and Loom versions are listed in `gradle.properties`. Check the official Fabric version selector before upgrading them.
 
 ## Development Roadmap
 
-- [ ] Configure the Java and Fabric development environment.
-- [ ] Create a working Minecraft development instance.
+- [ ] Import the project into IntelliJ IDEA and sync Gradle.
+- [ ] Run the Minecraft development client.
+- [ ] Verify the ClientPulse startup message in the log.
 - [ ] Implement the first client-side feature.
 - [ ] Establish a modular feature architecture.
 - [ ] Add useful performance information.
@@ -74,48 +73,36 @@ Exact version compatibility will be documented using the project's actual config
 - [ ] Add settings and keybind support.
 - [ ] Test features and investigate bugs.
 - [ ] Improve code quality and documentation.
-- [ ] Prepare a stable portfolio release.
-
-Progress will be tracked as development continues. Roadmap items will be checked off only when the corresponding work is complete.
 
 ## Project Structure
 
-The project structure will evolve as the implementation grows.
-
 ```text
 ClientPulse/
+├── assets/
+│   └── profile-banner.svg
 ├── src/
 │   └── main/
-│       ├── java/           # Java source code
-│       └── resources/      # Mod metadata and assets
-├── gradle/
+│       ├── java/com/ruhioki/clientpulse/
+│       │   └── ClientPulseClient.java
+│       └── resources/
+│           └── fabric.mod.json
 ├── build.gradle
 ├── gradle.properties
 ├── settings.gradle
-├── gradlew
-├── gradlew.bat
-├── README.md
+├── .gitignore
 ├── LICENSE
-└── .gitignore
+└── README.md
 ```
 
 ## Development Principles
 
-- Write readable and maintainable Java.
-- Prefer modular, reusable components.
-- Understand the APIs and concepts behind each feature.
+- Write readable, maintainable Java.
+- Prefer modular and reusable components.
+- Understand the APIs behind each feature.
 - Test changes in the actual development environment.
-- Investigate performance issues instead of making unsupported claims.
-- Document compatibility, dependencies, and important design decisions.
+- Investigate performance rather than making unsupported claims.
+- Document compatibility and design decisions.
 - Respect the licenses and requirements of Minecraft, Fabric, and third-party libraries.
-
-## Why ClientPulse?
-
-I don't want my GitHub profile to be just a collection of tutorials or copied code. I want it to demonstrate how I learn, solve problems, build features, and improve my engineering skills over time.
-
-ClientPulse gives me a practical space to turn Java knowledge into working software while exploring the technology behind Minecraft clients.
-
-The goal is not simply to finish a project. It's to become a stronger developer through the process.
 
 ## About Me
 
@@ -123,7 +110,7 @@ The goal is not simply to finish a project. It's to become a stronger developer 
 
 I'm an Artificial Intelligence and Data Science student interested in Java development, GPU technology, performance optimization, and Minecraft technology.
 
-I'm working toward becoming a capable software developer by building practical projects and documenting my progress.
+I'm building practical projects to strengthen my engineering skills and document my progress.
 
 ---
 
