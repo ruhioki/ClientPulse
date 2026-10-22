@@ -23,3 +23,14 @@ The first Gradle run downloads the configured Gradle distribution and game depen
 ClientPulse logs its startup message through the mod logger. The game configuration is written to `config/clientpulse.json` under the development run directory. Enabled modules are persisted when toggled; all HUD modules begin disabled.
 
 Run `.\gradlew.bat test` for the standalone feature-filtering tests. Run `.\gradlew.bat build` before sharing a mod JAR.
+
+## Forge 1.8.9 test build
+
+Install JDK 8 and run the version-specific wrapper from PowerShell:
+
+```powershell
+Set-Location .\versions\1.8.9-forge
+.\gradlew.bat build
+```
+
+The generated mod is in `versions\1.8.9-forge\build\libs`. Use only with Minecraft 1.8.9 and Forge 11.15.1.2318. OptiFine 1.8.9 has not been tested for runtime compatibility.
