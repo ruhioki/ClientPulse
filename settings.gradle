@@ -7,3 +7,6 @@ pluginManagement {
 }
 
 rootProject.name = 'ClientPulse'
+
+include 'clientpulse-core'
+project(':clientpulse-core').projectDir = file('clientpulse-core')

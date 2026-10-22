@@ -1,28 +1,25 @@
-# ClientPulse setup notes
-
-This is a starter scaffold targeting Minecraft 26.3 using the version values published by Fabric at the time this scaffold was prepared. Verify them at https://fabricmc.net/develop/ before updating or building.
+# ClientPulse development setup
 
 ## Requirements
 
-- IntelliJ IDEA
-- JDK 25
-- Gradle compatible with the selected Fabric Loom release
+- IntelliJ IDEA with Gradle project support
+- JDK 25 (set as both the Project SDK and Gradle JVM)
 - Internet access for the first dependency resolution
 
-## Open the project
+Gradle is supplied by the wrapper. No system Gradle installation is required.
 
-1. Extract this folder.
-2. Open the `ClientPulse` folder in IntelliJ IDEA.
-3. Set the Project SDK and Gradle JVM to JDK 25.
-4. Allow Gradle to sync.
-5. Run the Gradle `runClient` task if it is available after Loom sync.
+## Open and run
 
-This archive does not include the Gradle wrapper JAR/scripts. If IntelliJ does not import Gradle automatically, create or install a compatible Gradle wrapper before using `gradlew`.
+1. Open the repository root in IntelliJ IDEA and import it as a Gradle project.
+2. Set the Gradle JVM to JDK 25 and allow the initial sync to finish.
+3. Run `.\gradlew.bat build` to compile, test, and package the mod.
+4. Run `.\gradlew.bat runClient` to start Minecraft with ClientPulse in a development instance.
+5. Press F8 in the game to open the ClientPulse feature screen.
 
-## First milestone
+The first Gradle run downloads the configured Gradle distribution and game dependencies. The mod uses Minecraft's normal authentication and launch process; a development launch requires the game assets and network access to be available.
 
-When the development client launches, check the log for:
+## Logs and configuration
 
-`ClientPulse initialized. Learn. Build. Optimize.`
+ClientPulse logs its startup message through the mod logger. The game configuration is written to `config/clientpulse.json` under the development run directory. Enabled modules are persisted when toggled; all HUD modules begin disabled.
 
-The banner is a design concept. It does not imply that the dashboard or listed feature modules are implemented.
+Run `.\gradlew.bat test` for the standalone feature-filtering tests. Run `.\gradlew.bat build` before sharing a mod JAR.

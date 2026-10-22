@@ -3,7 +3,7 @@
   "id": "clientpulse",
   "version": "${version}",
   "name": "ClientPulse",
-  "description": "A client-side Minecraft mod exploring performance, customization, and clean code.",
+  "description": "A modular client-side HUD and settings experience.",
   "authors": ["ruhioki"],
   "contact": {
     "homepage": "https://github.com/ruhioki/ClientPulse",

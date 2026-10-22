@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+version = '0.1.0'
+group = 'com.ruhioki.clientpulse'
+archivesBaseName = 'clientpulse-1.7.10'
+
+minecraft {
+    version = '1.7.10-10.13.4.1614-1.7.10'
+    runDir = 'run'
+}
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+sourceSets.main.java.srcDir '../../clientpulse-core/src/main/java'
+
+// ForgeGradle 1.2 points at retired S3 URLs; these are Mojang's immutable 1.7.10 artifacts.
+tasks.getByName('downloadClient').setUrl(new net.minecraftforge.gradle.delayed.DelayedString(
+        project,
+        'https://launcher.mojang.com/v1/objects/e80d9b3bf5085002218d4be59e668bac718abbc6/client.jar'))
+tasks.getByName('downloadServer').setUrl(new net.minecraftforge.gradle.delayed.DelayedString(
+        project,
+        'https://launcher.mojang.com/v1/objects/952438ac4e01b4d115c5fc38f891710c4941df29/server.jar'))

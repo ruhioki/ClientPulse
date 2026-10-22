@@ -1,125 +1,75 @@
 # ClientPulse
 
-<p align="center">
-  <img src="assets/profile-banner.svg" width="100%" alt="ClientPulse animated purple and white banner"/>
-</p>
+ClientPulse is a multi-version client project for Minecraft Java Edition. It keeps shared feature metadata separate from version-specific game integrations and provides independently built client variants. It uses the normal Minecraft launcher and account authentication; it is not a standalone launcher.
 
-<p align="center">
-  <strong>Learn the fundamentals. Build the features. Optimize the experience.</strong>
-</p>
+## Current feature status
 
-<p align="center">
-  A Java and Fabric Minecraft client-side development project, built one feature at a time.
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-FFFFFF?style=for-the-badge&logo=openjdk&logoColor=111111" alt="Java"/>
-  <img src="https://img.shields.io/badge/Minecraft-8B5CF6?style=for-the-badge&logo=minecraft&logoColor=white" alt="Minecraft"/>
-  <img src="https://img.shields.io/badge/Fabric-A855F7?style=for-the-badge" alt="Fabric"/>
-  <img src="https://img.shields.io/badge/Focus-Performance-C084FC?style=for-the-badge" alt="Performance"/>
-  <img src="https://img.shields.io/badge/Status-In_Development-A78BFA?style=for-the-badge" alt="In development"/>
-</p>
-
----
-
-## The Vision
-
-Minecraft client development brings together programming, performance, user experience, and creativity.
-
-**ClientPulse is my journey from writing Java code to building practical Minecraft client-side software.**
-
-I'm using this project to deepen my understanding of Java, explore the Fabric modding ecosystem, and learn to design clean, modular, maintainable features.
-
-My long-term ambition is to create a polished client-side experience and build a strong software development portfolio for future Java developer opportunities.
-
-## Current Starter
-
-This repository begins with a minimal Fabric client mod initializer. It confirms that ClientPulse can load in the Minecraft client and writes a startup message to the development log.
-
-The dashboard banner is a **design concept**, not a claim that the pictured interface or its sample metrics are implemented.
-
-## Planned Features
-
-| Feature | Purpose |
+| Feature | Status |
 |---|---|
-| Performance HUD | Display useful FPS and client information |
-| Customizable HUD | Configure supported on-screen elements |
-| Feature management | Organize features into maintainable modules |
-| Keybind support | Provide convenient controls |
-| Settings interface | Centralize user configuration |
-| Performance testing | Investigate the impact of implemented features |
+| Shared Java 8-compatible feature model and registry | Implemented |
+| Minecraft 26.3 Fabric client, searchable settings screen, F8 keybind, HUD modules | Build and unit tests pass; in-game launch not yet verified |
+| Minecraft 1.7.10 Forge client and matching HUD/settings controls | Build verified on JDK 8; in-game launch not yet verified |
+| Windows development-client launch and in-game feature verification | Not yet verified |
 
-These are plans. Mark a feature complete only after it has been implemented and tested.
+All HUD modules are off by default. The modern settings screen opens with F8 or from Options > Controls > Key Binds; the 1.7.10 build uses its Forge Controls keybind.
 
-## Technology Stack
+See [docs/compatibility.md](docs/compatibility.md) for the support matrix and exact verification status.
 
-- **Java** for programming and object-oriented design.
-- **Fabric** for Minecraft mod development.
-- **Gradle** for builds and dependency management.
-- **IntelliJ IDEA** as the development environment.
-- **Git and GitHub** for version control and project documentation.
+## Modern target: Minecraft 26.3
 
-The Minecraft, Java, Fabric Loader, Fabric API, and Loom versions are listed in `gradle.properties`. Check the official Fabric version selector before upgrading them.
+- Minecraft Java Edition 26.3
+- Java 25
+- Fabric Loader 0.19.5
+- Fabric API 0.164.0+26.3
+- Fabric Loom 1.19.3
 
-## Development Roadmap
+These versions were checked against Fabric documentation, metadata, and Maven artifacts when selected. Re-check the [Fabric version selector](https://fabricmc.net/develop/) before upgrading.
 
-- [x] Add the starter source files and Fabric mod metadata.
-- [x] Add a GitHub Actions build check.
-- [ ] Import the project into IntelliJ IDEA and sync Gradle.
-- [ ] Run the Minecraft development client.
-- [ ] Verify the ClientPulse startup message in the log.
-- [ ] Implement the first client-side feature.
-- [ ] Establish a modular feature architecture.
-- [ ] Add useful performance information.
-- [ ] Develop configurable HUD elements.
-- [ ] Add settings and keybind support.
-- [ ] Test features and investigate bugs.
-- [ ] Improve code quality and documentation.
+## Build and run
 
-## Project Structure
+Install a JDK 25 distribution and ensure `java -version` reports version 25. From PowerShell in the project directory:
 
-```text
-ClientPulse/
-├── .github/
-│   └── workflows/
-│       └── build.yml
-├── assets/
-│   └── profile-banner.svg
-├── src/
-│   └── main/
-│       ├── java/com/ruhioki/clientpulse/
-│       │   └── ClientPulseClient.java
-│       └── resources/
-│           └── fabric.mod.json
-├── build.gradle
-├── gradle.properties
-├── settings.gradle
-├── .gitignore
-├── LICENSE
-└── README.md
+```powershell
+.\gradlew.bat build
+.\gradlew.bat runClient
 ```
 
-## Development Principles
+The first build downloads Gradle, Minecraft, and dependencies. `runClient` launches a development instance; sign in through the official Minecraft launcher for normal gameplay. In IntelliJ IDEA, open this directory as a Gradle project, set the Gradle JVM to JDK 25, sync, then run the `runClient` task.
 
-- Write readable, maintainable Java.
-- Prefer modular and reusable components.
-- Understand the APIs behind each feature.
-- Test changes in the actual development environment.
-- Investigate performance rather than making unsupported claims.
-- Document compatibility and design decisions.
-- Respect the licenses and requirements of Minecraft, Fabric, and third-party libraries.
+## Legacy target: Minecraft 1.7.10
 
-## About Me
+The legacy Forge implementation has its own Gradle 2.14.1 wrapper and requires JDK 8. It reuses `clientpulse-core` but does not share modern Minecraft classes or rendering APIs. Its `build` task has passed locally; the legacy launch has not yet been verified.
 
-**Mohamed | [@ruhioki](https://github.com/ruhioki)**
+```powershell
+Set-Location .\versions\1.7.10-forge
+.\gradlew.bat build
+.\gradlew.bat runClient
+```
 
-I'm an Artificial Intelligence and Data Science student interested in Java development, GPU technology, performance optimization, and Minecraft technology.
+The legacy wrapper and Forge dependencies build successfully; runtime launch and in-game behavior remain unverified.
 
-I'm building practical projects to strengthen my engineering skills and document my progress.
+## Configuration
 
----
+The file `config/clientpulse.json` is created in the Minecraft game directory. It stores the enabled state of registered features. Unknown feature IDs are ignored so configurations remain forward-compatible. If the file is invalid, ClientPulse logs a warning and starts with default feature states.
 
-<p align="center">
-  <strong>ClientPulse</strong><br/>
-  <sub>Think like a developer. Build like a creator. Optimize every detail.</sub>
-</p>
+## Project layout
+
+```text
+clientpulse-core/              # Version-independent feature model; Java 8 bytecode
+src/
+├── client/java/com/ruhioki/clientpulse/
+│   ├── config/             # Persisted feature settings
+│   ├── hud/                # Optional client HUD diagnostics
+│   ├── screen/             # Searchable client settings screen
+│   └── ClientPulseClient.java
+├── client/resources/       # Client translations
+└── main/resources/         # Fabric mod metadata
+versions/
+└── 1.7.10-forge/              # Standalone ForgeGradle 1.2 build and legacy adapter
+```
+
+## Development
+
+Run `.\gradlew.bat test` for unit tests and `.\gradlew.bat build` for the modern target. Use the version-specific wrapper for legacy builds. The GitHub Actions workflow builds both configured targets independently. The modern JAR is written to `build/libs/`; the legacy JAR is written to `versions/1.7.10-forge/build/libs/`. No screenshots or performance gains are claimed; graphical launch and in-game behavior still need verification on a machine with Minecraft assets and a usable display.
+
+ClientPulse is licensed under the MIT License. Minecraft and Fabric are third-party projects; their respective terms apply.
