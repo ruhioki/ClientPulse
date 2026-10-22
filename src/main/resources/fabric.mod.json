@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "clientpulse",
+  "version": "${version}",
+  "name": "ClientPulse",
+  "description": "A client-side Minecraft mod exploring performance, customization, and clean code.",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.ruhioki.clientpulse.ClientPulseClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
