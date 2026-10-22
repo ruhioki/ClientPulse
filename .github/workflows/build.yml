@@ -25,7 +25,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "9.6.0"
+          gradle-version: "9.7.0"
       - name: Build mod
         run: gradle --no-daemon build
       - name: Upload mod JAR
