@@ -6,7 +6,7 @@
 - `Cosmetics189` owns local profile initialization, properties serialization, atomic replacement, and Forge client setup.
 - `CosmeticRenderer189` renders original geometry from the 1.8.9 `RenderPlayerEvent.Post` hook. It applies only to the local player and restores OpenGL state after drawing.
 - `CosmeticsScreen189` is an animated-theme-compatible, non-pausing screen with search, categories, favorites, selection/reset controls, a rotating player preview, enable/animation switches, tint presets, scale, animation-duration controls, and cape/wing height adjustment.
-- Press **C** while the Right Shift Click GUI is open to open Cosmetics Studio. Search fields and active setting key capture retain keyboard input.
+- Open Cosmetics Studio from the visible **COSMETICS** button in the Right Shift Click GUI header, or press **C** while that GUI is open. Press Escape in Studio to return to the Click GUI. Search fields and active setting key capture retain keyboard input.
 - Settings are stored independently in `config/clientpulse-cosmetics.properties`; no Lunar Client files are read at runtime.
 
 ## Included original cosmetics

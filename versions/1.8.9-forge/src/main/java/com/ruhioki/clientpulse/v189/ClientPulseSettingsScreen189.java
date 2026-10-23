@@ -221,6 +221,11 @@ public final class ClientPulseSettingsScreen189 extends GuiScreen {
             beginClose();
             return;
         }
+        if (hasCosmeticsButton()
+                && inside(mouseX, mouseY, panelLeft + panelWidth - 126, panelTop + 12, 82, 22)) {
+            mc.displayGuiScreen(new CosmeticsScreen189(this));
+            return;
+        }
         if (inside(mouseX, mouseY, panelLeft + 4, panelTop + 4, panelWidth - 44, 48)) {
             draggingPanel = true;
             dragOffsetX = mouseX - panelLeft;
@@ -421,6 +426,15 @@ public final class ClientPulseSettingsScreen189 extends GuiScreen {
         fontRendererObj.drawString("Search and filter modules", contentLeft, panelTop + 34,
                 CategorySidebar189.withAlpha(theme.muted(), alpha));
 
+        if (hasCosmeticsButton()) {
+            int cosmeticsButtonX = panelLeft + panelWidth - 126;
+            boolean cosmeticsHovered = inside(mouseX, mouseY, cosmeticsButtonX, panelTop + 12, 82, 22);
+            Gui.drawRect(cosmeticsButtonX, panelTop + 12, cosmeticsButtonX + 82, panelTop + 34,
+                    CategorySidebar189.withAlpha(cosmeticsHovered ? theme.accent() : 0xFF27303E, alpha));
+            fontRendererObj.drawString("COSMETICS", cosmeticsButtonX + 6, panelTop + 19,
+                    CategorySidebar189.withAlpha(theme.text(), alpha));
+        }
+
         Gui.drawRect(panelLeft + panelWidth - 34, panelTop + 12,
                 panelLeft + panelWidth - 12, panelTop + 34,
                 CategorySidebar189.withAlpha(inside(mouseX, mouseY,
@@ -548,6 +562,10 @@ public final class ClientPulseSettingsScreen189 extends GuiScreen {
         }
         closing = true;
         transition.animateTo(0.0f, theme.animationDuration(), Easings.EASE_IN_OUT);
+    }
+
+    private boolean hasCosmeticsButton() {
+        return panelWidth >= 300;
     }
 
     private int visibleSettingCapacity() {
