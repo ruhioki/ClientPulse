@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ruhioki.clientpulse.core.animation.Animation;
+import com.ruhioki.clientpulse.core.animation.ColorAnimation;
 import com.ruhioki.clientpulse.core.animation.Easings;
 import com.ruhioki.clientpulse.core.module.ClientModule;
 import com.ruhioki.clientpulse.core.module.ModuleCategory;
@@ -18,8 +19,12 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
 public final class ClientPulseSettingsScreen189 extends GuiScreen {
     private static final int PANEL_MAX_WIDTH = 900;
@@ -404,8 +409,7 @@ public final class ClientPulseSettingsScreen189 extends GuiScreen {
                 alpha(theme.panel(), progress));
         Gui.drawRect(panelLeft, panelTop, panelLeft + sidebarWidth, panelTop + panelHeight,
                 alpha(theme.sidebar(), progress));
-        Gui.drawRect(panelLeft, panelTop, panelLeft + panelWidth, panelTop + 3,
-                theme.accentArgb(progress));
+        drawAnimatedAccentBar(progress);
         Gui.drawRect(panelLeft + sidebarWidth, panelTop + 54,
                 panelLeft + panelWidth, panelTop + 55, alpha(0x55425267, progress));
 
@@ -453,6 +457,51 @@ public final class ClientPulseSettingsScreen189 extends GuiScreen {
                         CategorySidebar189.withAlpha(theme.muted(), alpha));
             }
         }
+    }
+
+    private void drawAnimatedAccentBar(float alpha) {
+        final int segments = 32;
+        final int purple = 0xB083FF;
+        final int white = 0xF0F4FA;
+        float phase = theme.animationsEnabled()
+                ? (System.currentTimeMillis() % 2400L) / 2400.0f : 0.0f;
+
+        GL11.glPushAttrib(GL11.GL_ENABLE_BIT | GL11.GL_COLOR_BUFFER_BIT | GL11.GL_CURRENT_BIT);
+        try {
+            GlStateManager.disableTexture2D();
+            GlStateManager.enableBlend();
+            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+            Tessellator tessellator = Tessellator.getInstance();
+            WorldRenderer renderer = tessellator.getWorldRenderer();
+            renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+            for (int segment = 0; segment < segments; segment++) {
+                float leftProgress = segment / (float) segments;
+                float rightProgress = (segment + 1) / (float) segments;
+                int leftColor = gradientColor(leftProgress, phase, purple, white);
+                int rightColor = gradientColor(rightProgress, phase, purple, white);
+                int left = panelLeft + panelWidth * segment / segments;
+                int right = panelLeft + panelWidth * (segment + 1) / segments;
+                addGradientVertex(renderer, left, panelTop, leftColor, alpha);
+                addGradientVertex(renderer, left, panelTop + 3, leftColor, alpha);
+                addGradientVertex(renderer, right, panelTop + 3, rightColor, alpha);
+                addGradientVertex(renderer, right, panelTop, rightColor, alpha);
+            }
+            tessellator.draw();
+        } finally {
+            GL11.glPopAttrib();
+        }
+    }
+
+    private int gradientColor(float position, float phase, int purple, int white) {
+        float blend = theme.animationsEnabled()
+                ? 0.5f + 0.5f * (float) Math.sin(position * Math.PI * 2.0 + phase * Math.PI * 2.0)
+                : position;
+        return ColorAnimation.interpolateRgb(purple, white, blend);
+    }
+
+    private static void addGradientVertex(WorldRenderer renderer, int x, int y, int color, float alpha) {
+        renderer.pos(x, y, 0.0).color(((color >> 16) & 0xFF) / 255.0f,
+                ((color >> 8) & 0xFF) / 255.0f, (color & 0xFF) / 255.0f, alpha).endVertex();
     }
 
     private void drawSidebar(int mouseX, int mouseY, float alpha) {

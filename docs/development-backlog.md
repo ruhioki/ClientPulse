@@ -25,7 +25,7 @@ ClientPulse's active target for this cycle is Minecraft 1.8.9 on Forge 11.15.1.2
 
 1. **Completed — viewport-aware HUD positioning.** Existing HUD modules have persistent horizontal/vertical percentage settings and use the current scaled viewport with clamping and boundary/persistence tests.
 2. **Implemented; interaction verification pending — original cosmetics.** Added a local 1.8.9 procedural cosmetic catalog/renderer and Cosmetics Studio, including reset and cape/wing placement controls. Builds/tests pass, and the rebuilt client visibly renders cosmetics at the player’s back/shoulder area; manually verify reset persistence, mouse interactions, and GUI-scale behavior.
-3. **Planned — useful 1.8.9 HUD set.** Add keystrokes, CPS, ping, and armor status as separate opt-in modules, each with compact settings and independent positions. Validate their 1.8.9 data sources and event timing first.
+3. **In progress — useful 1.8.9 HUD set.** The configurable CPS HUD now tracks left/right clicks in a rolling one-second window and persists its settings. Its isolated Forge 1.8.9 `clean test build` passed with 15 tests; the commit is integrated here, but this branch still needs a serialized combined build. Keystrokes, ping, and armor status remain planned.
 4. **Planned — crosshair customization.** Add a small set of original color, size, gap, and opacity controls using 1.8.9-compatible rendering; test with GUI scale changes and OptiFine before claiming compatibility.
 5. **Planned — named configuration profiles.** Add create/switch/rename/export/import for validated settings, with safe filenames, clear errors, and migration/round-trip tests.
 6. **Planned — inventory and interface quality of life.** Prototype a local inventory search/filter with a deliberately small grammar; do not alter container behavior until slot/input regression tests exist.
@@ -44,6 +44,7 @@ ClientPulse's active target for this cycle is Minecraft 1.8.9 on Forge 11.15.1.2
 ### In progress
 
 - Manual Cosmetics Studio mouse-interaction, reset-persistence, and GUI-scale verification.
+- Combined Forge verification of the integrated CPS HUD and animated purple-to-white Click GUI accent. The CPS slice passed its isolated Java 8 build; the combined build is pending because the host currently has active Java 21 workloads, and this worktree has no Java 8 JDK installed.
 
 ### Blocked
 
