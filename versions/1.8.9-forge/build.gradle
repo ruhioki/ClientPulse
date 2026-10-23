@@ -10,6 +10,10 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
+repositories {
+    mavenCentral()
+}
+
 version = '0.1.0'
 group = 'com.ruhioki.clientpulse'
 archivesBaseName = 'clientpulse-1.8.9'
@@ -24,3 +28,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 sourceSets.main.java.srcDir '../../clientpulse-core/src/main/java'
+
+dependencies {
+    testCompile 'junit:junit:4.13.2'
+}
