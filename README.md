@@ -6,13 +6,13 @@ ClientPulse is a multi-version client project for Minecraft Java Edition. It kee
 
 | Feature | Status |
 |---|---|
-| Shared Java 8-compatible feature model and registry | Implemented |
+| Shared Java 8-compatible animation, module and setting foundations | Implemented |
 | Minecraft 26.3 Fabric client, searchable settings screen, Right Shift keybind, HUD modules | Build and unit tests pass; in-game launch not yet verified |
-| Minecraft 1.8.9 Forge client, HUD modules and settings | Build verified on JDK 8; OptiFine runtime not yet verified |
+| Minecraft 1.8.9 Forge client, animated Click GUI, configurable modules/settings and positionable HUD | Clean test/build and development-world launch pass on JDK 8; Click GUI open/render smoke-tested; OptiFine not verified |
 | Minecraft 1.7.10 Forge client and matching HUD/settings controls | Build verified on JDK 8; in-game launch not yet verified |
-| Windows development-client launch and in-game feature verification | Not yet verified |
+| 26.3 and 1.7.10 in-game feature verification | Not yet verified |
 
-All HUD modules are off by default. The Click GUI opens with Right Shift by default on all implemented targets. Rebind it in Options > Controls > Key Binds. The keybind does not open the GUI while another screen, including chat, is active.
+All HUD modules are off by default. On the 1.8.9 Forge target, the Click GUI opens with Right Shift by default; rebind it in the GUI's Interface Theme settings or Options > Controls > Key Binds. The keybind does not open the GUI while another screen, including chat, is active.
 
 See [docs/compatibility.md](docs/compatibility.md) for the support matrix and exact verification status.
 
@@ -51,14 +51,15 @@ The legacy wrapper and Forge dependencies build successfully; runtime launch and
 
 ## Minecraft 1.8.9 Forge test build
 
-The 1.8.9 build is a separate Forge mod and is not compatible with the 1.7.10 or 26.3 artifacts. It targets Forge 11.15.1.2318 and Java 8; its local build succeeds. To build it locally:
+The 1.8.9 build is a separate Forge mod and is not compatible with the 1.7.10 or 26.3 artifacts. It targets Forge 11.15.1.2318 and Java 8 and includes the animation engine, module/settings framework, HUD modules, and a searchable Click GUI. To build and launch it locally:
 
 ```powershell
 Set-Location .\versions\1.8.9-forge
-.\gradlew.bat build
+.\gradlew.bat clean test build
+.\gradlew.bat runClient
 ```
 
-To try it with OptiFine, use a Minecraft 1.8.9 Forge profile with Forge 11.15.1.2318 and a matching OptiFine 1.8.9 installation. Put the `clientpulse-1.8.9-0.1.0.jar` artifact in that profile's `mods` folder. OptiFine compatibility has not been verified in-game; report crashes with the full game log and the exact Forge/OptiFine versions.
+Press Right Shift in-game to open the GUI. Select a module to edit its settings; use its toggle to enable or disable it. Configuration is stored in `config/clientpulse-1.8.9.properties` under the development run directory. The client and GUI have launched in a development world, but OptiFine compatibility has not been verified. To try it with OptiFine, use a Minecraft 1.8.9 Forge profile with Forge 11.15.1.2318 and a matching OptiFine 1.8.9 installation. Put `clientpulse-1.8.9-0.1.0.jar` in that profile's `mods` folder.
 
 ## Configuration
 
@@ -67,7 +68,7 @@ The modern Fabric target stores settings in `config/clientpulse.json`. Forge tar
 ## Project layout
 
 ```text
-clientpulse-core/              # Version-independent feature model; Java 8 bytecode
+clientpulse-core/              # Version-independent animations, modules and settings; Java 8 bytecode
 src/
 ├── client/java/com/ruhioki/clientpulse/
 │   ├── config/             # Persisted feature settings
