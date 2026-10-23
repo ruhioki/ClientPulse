@@ -36,15 +36,21 @@ public final class ModuleRegistry {
                 options("Integer", "One decimal", "Two decimals"), "One decimal"));
         addHudPosition(coordinates, 2, 5);
 
+        ClientModule cps = registry.register(new ClientModule(
+                "cps-hud", "CPS Counter", "Show recent left and right mouse clicks per second.",
+                ModuleCategory.HUD));
+        cps.addSetting(new ColorSetting("color", "Text color", "RGB color in hexadecimal.", 0xFFFFFF));
+        addHudPosition(cps, 2, 8);
+
         ClientModule session = registry.register(new ClientModule(
                 "session-hud", "Session Info", "Show the current dimension.", ModuleCategory.HUD));
         session.addSetting(new ColorSetting("color", "Text color", "RGB color in hexadecimal.", 0xC2A7FF));
-        addHudPosition(session, 2, 8);
+        addHudPosition(session, 2, 11);
 
         ClientModule memory = registry.register(new ClientModule(
                 "memory-hud", "Memory Usage", "Show JVM memory usage in megabytes.", ModuleCategory.PERFORMANCE));
         memory.addSetting(new ColorSetting("color", "Text color", "RGB color in hexadecimal.", 0x64DDB2));
-        addHudPosition(memory, 2, 11);
+        addHudPosition(memory, 2, 14);
 
         ClientModule interfaceTheme = registry.register(new ClientModule(
                 "interface-theme", "Interface Theme", "Customize the Click GUI appearance.", ModuleCategory.VISUAL));

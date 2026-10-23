@@ -11,9 +11,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Properties;
 
+import com.ruhioki.clientpulse.core.hud.ClickRateTracker;
+import com.ruhioki.clientpulse.core.hud.HudPosition;
 import com.ruhioki.clientpulse.core.module.ClientModule;
 import com.ruhioki.clientpulse.core.module.ModuleRegistry;
-import com.ruhioki.clientpulse.core.hud.HudPosition;
 import com.ruhioki.clientpulse.core.setting.ColorSetting;
 import com.ruhioki.clientpulse.core.setting.EnumSetting;
 import com.ruhioki.clientpulse.core.setting.KeybindSetting;
@@ -29,6 +30,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 public final class ClientProxy189 extends CommonProxy189 {
     private static final KeyBinding OPEN_SETTINGS = new KeyBinding(
@@ -38,6 +40,8 @@ public final class ClientProxy189 extends CommonProxy189 {
     private long frameWindowStart;
     private int framesInWindow;
     private int measuredFramesPerSecond;
+    private final ClickRateTracker leftClicks = new ClickRateTracker();
+    private final ClickRateTracker rightClicks = new ClickRateTracker();
 
     @Override
     public void initialize() {
@@ -72,6 +76,23 @@ public final class ClientProxy189 extends CommonProxy189 {
     }
 
     @SubscribeEvent
+    public void onMouseInput(InputEvent.MouseInputEvent event) {
+        int button = Mouse.getEventButton();
+        if (!Mouse.getEventButtonState() || Minecraft.getMinecraft().currentScreen != null
+                || Minecraft.getMinecraft().thePlayer == null
+                || !ClientPulse189.modules().get("cps-hud").enabled()) {
+            return;
+        }
+
+        long now = System.nanoTime();
+        if (button == 0) {
+            leftClicks.recordClick(now);
+        } else if (button == 1) {
+            rightClicks.recordClick(now);
+        }
+    }
+
+    @SubscribeEvent
     public void onHudRender(RenderGameOverlayEvent.Text event) {
         updateFrameRate();
         Minecraft minecraft = Minecraft.getMinecraft();
@@ -96,6 +117,15 @@ public final class ClientProxy189 extends CommonProxy189 {
                     + formatCoordinate(minecraft.thePlayer.posZ, decimals);
             drawPositionedHudText(minecraft, resolution, coordinates, coordinateText,
                     ((ColorSetting) coordinates.setting("color")).rgb(), 1.0f);
+        }
+
+        ClientModule cps = modules.get("cps-hud");
+        if (cps.enabled() && minecraft.thePlayer != null) {
+            long now = System.nanoTime();
+            String cpsText = "CPS: L " + leftClicks.clicksPerSecond(now)
+                    + " | R " + rightClicks.clicksPerSecond(now);
+            drawPositionedHudText(minecraft, resolution, cps, cpsText,
+                    ((ColorSetting) cps.setting("color")).rgb(), 1.0f);
         }
 
         ClientModule session = modules.get("session-hud");

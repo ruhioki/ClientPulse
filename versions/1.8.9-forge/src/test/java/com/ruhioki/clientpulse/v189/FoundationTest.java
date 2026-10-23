@@ -5,6 +5,7 @@ import java.util.Properties;
 import com.ruhioki.clientpulse.core.animation.Animation;
 import com.ruhioki.clientpulse.core.animation.ColorAnimation;
 import com.ruhioki.clientpulse.core.animation.Easings;
+import com.ruhioki.clientpulse.core.hud.ClickRateTracker;
 import com.ruhioki.clientpulse.core.hud.HudPosition;
 import com.ruhioki.clientpulse.core.module.ClientModule;
 import com.ruhioki.clientpulse.core.module.ModuleCategory;
@@ -75,12 +76,27 @@ public final class FoundationTest {
     }
 
     @Test
+    public void clickRateCountsOnlyClicksInsideTheRollingSecond() {
+        ClickRateTracker tracker = new ClickRateTracker();
+        tracker.recordClick(100L);
+        tracker.recordClick(400000000L);
+        tracker.recordClick(900000000L);
+
+        assertEquals(3, tracker.clicksPerSecond(1000000000L));
+        assertEquals(2, tracker.clicksPerSecond(1100000000L));
+        assertEquals(0, tracker.clicksPerSecond(1900000000L));
+    }
+
+    @Test
     public void registryPersistsModuleAndSettingStateAndValidatesRestoration() {
         ModuleRegistry registry = ModuleRegistry.createDefault();
         ClientModule fps = registry.get("fps-hud");
+        ClientModule cps = registry.get("cps-hud");
         fps.setEnabled(true);
         ((ColorSetting) fps.setting("color")).setValue(Integer.valueOf(0x12ABEF));
         ((NumberSetting) fps.setting("x-position")).setValue(Double.valueOf(37.0));
+        cps.setEnabled(true);
+        ((NumberSetting) cps.setting("y-position")).setValue(Double.valueOf(42.0));
 
         Properties saved = new Properties();
         registry.save(saved);
@@ -89,6 +105,9 @@ public final class FoundationTest {
         assertTrue(restored.get("fps-hud").enabled());
         assertEquals(0x12ABEF, ((ColorSetting) restored.get("fps-hud").setting("color")).rgb());
         assertEquals(37.0, ((NumberSetting) restored.get("fps-hud").setting("x-position")).doubleValue(),
+                0.0001);
+        assertTrue(restored.get("cps-hud").enabled());
+        assertEquals(42.0, ((NumberSetting) restored.get("cps-hud").setting("y-position")).doubleValue(),
                 0.0001);
 
         saved.setProperty("module.fps-hud.scale", "infinity");
