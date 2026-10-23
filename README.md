@@ -32,20 +32,20 @@ I'm using this project to deepen my understanding of Java, explore the Fabric mo
 
 My long-term ambition is to create a polished client-side experience and build a strong software development portfolio for future Java developer opportunities.
 
-## Current Starter
+## Current Feature: FPS HUD
 
-This repository begins with a minimal Fabric client mod initializer. It confirms that ClientPulse can load in the Minecraft client and writes a startup message to the development log.
+ClientPulse currently displays a small FPS counter in the top-left corner of the in-game HUD. The counter measures rendered frames over one-second intervals. Press **F8** to toggle it; the key can also be changed in **Options → Controls → Key Binds → ClientPulse**.
 
-The dashboard banner is a **design concept**, not a claim that the pictured interface or its sample metrics are implemented.
+The dashboard banner is a **design concept**, not a claim that the pictured interface or its sample metrics are implemented. This FPS counter is the only performance metric currently implemented.
 
 ## Planned Features
 
 | Feature | Purpose |
 |---|---|
-| Performance HUD | Display useful FPS and client information |
+| FPS HUD | Display rendered FPS; toggle with a configurable keybind (F8 by default) |
 | Customizable HUD | Configure supported on-screen elements |
 | Feature management | Organize features into maintainable modules |
-| Keybind support | Provide convenient controls |
+| Keybind support | Add configurable controls for implemented features |
 | Settings interface | Centralize user configuration |
 | Performance testing | Investigate the impact of implemented features |
 
@@ -66,11 +66,12 @@ The Minecraft, Java, Fabric Loader, Fabric API, and Loom versions are listed in 
 - [ ] Import the project into IntelliJ IDEA and sync Gradle.
 - [ ] Run the Minecraft development client.
 - [ ] Verify the ClientPulse startup message in the log.
-- [ ] Implement the first client-side feature.
+- [x] Implement the first client-side feature: an FPS HUD.
 - [ ] Establish a modular feature architecture.
-- [ ] Add useful performance information.
+- [x] Add FPS as the first performance metric.
 - [ ] Develop configurable HUD elements.
-- [ ] Add settings and keybind support.
+- [x] Add a configurable keybind for toggling the FPS HUD.
+- [ ] Add settings for HUD customization.
 - [ ] Test features and investigate bugs.
 - [ ] Improve code quality and documentation.
 
@@ -83,8 +84,10 @@ ClientPulse/
 ├── src/
 │   └── main/
 │       ├── java/com/ruhioki/clientpulse/
-│       │   └── ClientPulseClient.java
+│       │   ├── ClientPulseClient.java
+│       │   └── hud/FpsHud.java
 │       └── resources/
+│           ├── assets/clientpulse/lang/en_us.json
 │           └── fabric.mod.json
 ├── build.gradle
 ├── gradle.properties
