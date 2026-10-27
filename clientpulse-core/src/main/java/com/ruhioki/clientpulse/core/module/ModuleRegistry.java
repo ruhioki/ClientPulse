@@ -45,7 +45,7 @@ public final class ModuleRegistry {
         ClientModule keystrokes = registry.register(new ClientModule(
                 "keystrokes-hud", "Keystrokes", "Show movement, jump, and mouse input.",
                 ModuleCategory.HUD));
-        keystrokes.addSetting(new ColorSetting("color", "Pressed key accent color.", "RGB color in hexadecimal.",
+        keystrokes.addSetting(new ColorSetting("color", "Accent color", "RGB color in hexadecimal.",
                 0xA78BFA));
         addHudPosition(keystrokes, 2, 30);
 
