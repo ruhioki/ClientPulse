@@ -9,15 +9,25 @@ public final class ClickRateTracker {
 
     private final Deque<Long> clickTimes = new ArrayDeque<Long>();
 
+    /**
+     * Records a click using a monotonic timestamp, such as System.nanoTime().
+     * Expired entries are removed here as well as during reads so a quiet HUD
+     * cannot leave an ever-growing queue behind.
+     */
     public void recordClick(long timestampNanos) {
+        pruneExpiredClicks(timestampNanos);
         clickTimes.addLast(Long.valueOf(timestampNanos));
     }
 
     public int clicksPerSecond(long nowNanos) {
+        pruneExpiredClicks(nowNanos);
+        return clickTimes.size();
+    }
+
+    private void pruneExpiredClicks(long nowNanos) {
         long cutoff = nowNanos - WINDOW_NANOS;
         while (!clickTimes.isEmpty() && clickTimes.peekFirst().longValue() <= cutoff) {
             clickTimes.removeFirst();
         }
-        return clickTimes.size();
     }
 }

@@ -88,6 +88,16 @@ public final class FoundationTest {
     }
 
     @Test
+    public void clickRateExpiresClicksExactlyOneSecondOld() {
+        ClickRateTracker tracker = new ClickRateTracker();
+        tracker.recordClick(100L);
+
+        assertEquals(0, tracker.clicksPerSecond(1000000100L));
+        tracker.recordClick(2000000000L);
+        assertEquals(1, tracker.clicksPerSecond(2000000000L));
+    }
+
+    @Test
     public void registryPersistsModuleAndSettingStateAndValidatesRestoration() {
         ModuleRegistry registry = ModuleRegistry.createDefault();
         ClientModule fps = registry.get("fps-hud");
