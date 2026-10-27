@@ -42,6 +42,13 @@ public final class ModuleRegistry {
         cps.addSetting(new ColorSetting("color", "Text color", "RGB color in hexadecimal.", 0xFFFFFF));
         addHudPosition(cps, 2, 8);
 
+        ClientModule keystrokes = registry.register(new ClientModule(
+                "keystrokes-hud", "Keystrokes", "Show movement, jump, and mouse input.",
+                ModuleCategory.HUD));
+        keystrokes.addSetting(new ColorSetting("color", "Accent color", "RGB color in hexadecimal.",
+                0xA78BFA));
+        addHudPosition(keystrokes, 2, 30);
+
         ClientModule session = registry.register(new ClientModule(
                 "session-hud", "Session Info", "Show the current dimension.", ModuleCategory.HUD));
         session.addSetting(new ColorSetting("color", "Text color", "RGB color in hexadecimal.", 0xC2A7FF));
