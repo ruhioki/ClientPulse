@@ -74,7 +74,10 @@ public final class ClientPulseConfig {
 
         Path temporaryPath = path.resolveSibling(path.getFileName() + ".tmp");
         try {
-            Files.createDirectories(path.getParent());
+            Path parent = path.getParent();
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
             Files.writeString(temporaryPath, GSON.toJson(root), StandardCharsets.UTF_8);
             try {
                 Files.move(temporaryPath, path, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
@@ -84,6 +87,12 @@ public final class ClientPulseConfig {
             return true;
         } catch (IOException exception) {
             logger.error("Could not save ClientPulse settings to {}.", path, exception);
+            try {
+                Files.deleteIfExists(temporaryPath);
+            } catch (IOException cleanupException) {
+                exception.addSuppressed(cleanupException);
+                logger.warn("Could not remove temporary ClientPulse settings file {}.", temporaryPath, cleanupException);
+            }
             return false;
         }
     }
