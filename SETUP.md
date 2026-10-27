@@ -25,4 +25,13 @@ When the development client launches, check the log for:
 
 `ClientPulse initialized. Learn. Build. Optimize.`
 
-The banner is a design concept. It does not imply that the dashboard or listed feature modules are implemented.
+The FPS HUD is enabled by default and appears in the top-left corner during gameplay. Press **F8** to hide or show it; its binding can be changed under **Options → Controls → Key Binds → ClientPulse**.
+
+The HUD reports rendered frames per second, sampled over one-second intervals. Allow a moment after launch or enabling it for the first reading to appear. The banner is a design concept and does not imply that its dashboard or other planned feature modules are implemented.
+
+## Manual feature check
+
+1. Launch the development client and enter a world.
+2. Confirm that `ClientPulse | <number> FPS` appears in the top-left corner and updates about once per second.
+3. Press **F8** and confirm that the counter disappears; press **F8** again and confirm that it returns.
+4. Open **Options → Controls → Key Binds → ClientPulse**, change the binding, and confirm that the new key toggles the counter.
