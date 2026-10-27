@@ -50,6 +50,13 @@ jobs:
           java-version: "8"
       - name: Build mod
         run: bash ./gradlew --no-daemon build
+      - name: Upload mod JAR
+        uses: actions/upload-artifact@v7
+        with:
+          name: clientpulse-1.7.10-forge-${{ github.sha }}
+          path: versions/1.7.10-forge/build/libs/*.jar
+          if-no-files-found: error
+          retention-days: 14
 
   forge-1-8-9:
     name: Build Forge 1.8.9 client
