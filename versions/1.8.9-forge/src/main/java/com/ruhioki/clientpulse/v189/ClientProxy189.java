@@ -128,6 +128,11 @@ public final class ClientProxy189 extends CommonProxy189 {
                     ((ColorSetting) cps.setting("color")).rgb(), 1.0f);
         }
 
+        ClientModule keystrokes = modules.get("keystrokes-hud");
+        if (keystrokes.enabled() && minecraft.thePlayer != null && minecraft.currentScreen == null) {
+            KeystrokesHud189.render(minecraft, resolution, keystrokes);
+        }
+
         ClientModule session = modules.get("session-hud");
         if (session.enabled() && minecraft.theWorld != null) {
             drawPositionedHudText(minecraft, resolution, session,
