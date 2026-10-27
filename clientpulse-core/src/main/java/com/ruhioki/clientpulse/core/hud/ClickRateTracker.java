@@ -4,7 +4,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public final class ClickRateTracker {
-    private static final long WINDOW_NANOS = 1_000_000_000L;
+    // Keep this literal Java 6-compatible for the Minecraft 1.7.10 Forge target.
+    private static final long WINDOW_NANOS = 1000000000L;
 
     private final Deque<Long> clickTimes = new ArrayDeque<Long>();
 
