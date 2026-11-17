@@ -1,5 +1,9 @@
 # ClientPulse
 
+[![Build](https://github.com/ruhioki/ClientPulse/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ruhioki/ClientPulse/actions/workflows/build.yml)
+
+ClientPulse is under active development. CI builds the configured Minecraft targets independently and stores successful JAR outputs as short-lived workflow artifacts. A green workflow means the configured automated build passed; it does not by itself prove that every target has been manually tested in-game.
+
 ClientPulse is a multi-version client project for Minecraft Java Edition. It keeps shared feature metadata separate from version-specific game integrations and provides independently built client variants. It uses the normal Minecraft launcher and account authentication; it is not a standalone launcher.
 
 ## Current feature status
@@ -81,6 +85,12 @@ versions/
 ├── 1.7.10-forge/              # ForgeGradle 1.2 build and legacy adapter
 └── 1.8.9-forge/               # ForgeGradle 2.1 build and 1.8.9 adapter
 ```
+
+## CI and release artifacts
+
+Every push and pull request targeting `main` runs the configured modern Fabric, Forge 1.7.10, and Forge 1.8.9 build jobs. Successful JARs are uploaded as GitHub Actions artifacts and retained for 14 days. Open the [latest workflow runs](https://github.com/ruhioki/ClientPulse/actions/workflows/build.yml) and select a successful run to download its artifacts.
+
+These are CI artifacts, not signed public releases. Before distributing a build, verify the relevant Minecraft version in-game and review the applicable mod and third-party licenses.
 
 ## Development
 
